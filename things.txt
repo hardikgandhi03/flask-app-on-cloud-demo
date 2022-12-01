@@ -1,0 +1,23 @@
+Setting enviornment in python for flask :
+set FLASK_APP=main.py
+$env:FLASK_APP = "main.py"
+flask run
+$env:FLASK_ENV = "development" //set the enviornment to development
+
+
+    app.run(host="0.0.0.0", port=5000)
+
+    sudo apt-get install pip
+
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAebPLbJ2SfQclSjf9dXFNIKzM5Nx_C0MU",
+    authDomain: "test-406a1.firebaseapp.com",
+    projectId: "test-406a1",
+    storageBucket: "test-406a1.appspot.com",
+    messagingSenderId: "114984177286",
+    appId: "1:114984177286:web:bc422f5edc8914ff7a0b07"
+  };
+
+  

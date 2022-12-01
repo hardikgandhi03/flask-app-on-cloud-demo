@@ -1,0 +1,51 @@
+Flow of creating project :
+-> VPC
+-> Subnet
+-> Reserve static-ip address
+-> Firewall rule
+-> Health-check
+-> Instance template
+-> Managed Instance group
+-> Load Balancer
+
+
+=> Commands :
+
+Create VPC :
+gcloud compute networks create [name-of-vpc] --project=[project-id] --subnet-mode=custom --mtu=1460 --bgp-routing-mode=global
+
+Create subnet :
+gcloud compute networks subnets create [name-of-subnet] --project=[project-id] --range=10.128.0.0/20 --stack-type=IPV4_ONLY --network=[name-of-vpc] --region=us-central1
+
+Reserve static ip address :
+gcloud compute addresses create [name-of-static-ip] --project=[project-id] –global
+
+Firewall rule :
+gcloud compute --project=[project-id] firewall-rules create [name-of-firewall-rule] --direction=INGRESS --priority=1000 --network=[name-of-vpc] --action=ALLOW --rules=tcp:22,tcp:5000 --source-ranges=0.0.0.0/0
+
+Health-check :
+gcloud beta compute health-checks create tcp [name-of-health-check] --project=[project-id] --port=5000 --proxy-header=NONE --no-enable-logging --check-interval=10 --timeout=10 --unhealthy-threshold=3 --healthy-threshold=2
+
+Instance template :
+Do with console
+
+Startup-script :
+sudo apt update
+sudo apt install python3-pip -y
+sudo apt-get -y install git
+git clone https://github.com/hardikgandhi03/cloud-application-demo
+cd /cloud-application-demo/
+touch serviceAccountKey.json
+Copy serviceAccountKey.json file contents from your firebase project.
+pip install flask
+sudo pip install firebase-admin
+python3 main.py
+
+Managed Instance group:
+Do with console
+
+Load Balancer :
+Do it with the console & assign the frontend the ip we reserved earlier!
+
+docs:
+https://cloud.google.com/load-balancing/docs/health-checks#fw-rule
